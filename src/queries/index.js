@@ -33,6 +33,9 @@ export const GET_ALL_TRAY = gql`
     categories{
       title
     }
+    tags{
+      name
+    }
   }
 }
 `;

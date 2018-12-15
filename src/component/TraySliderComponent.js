@@ -5,22 +5,7 @@ import Slider from "react-slick";
 
 class TraySliderComponent extends Component {
     state = {
-        lastItem: 0,
-        indexes: [
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            9,
-            10,
-            11,
-            12,
-            13
-        ]
+        lastItem: 0
     }
     componentDidMount() {
         if (window.matchMedia('screen and (max-width: 2800px) and (min-width: 1325px)').matches) {
@@ -80,11 +65,37 @@ class TraySliderComponent extends Component {
                 }
             ]
         };
+        console.log(this.props.knowledgeBaseArticles);
         return (
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-12 slider-title">
-                        <div className="BlockTitle site-color">World Digital Premiere</div>
+                        <div className="BlockTitle site-color">{this.props.knowledgeBaseArticles &&
+                            this.props.knowledgeBaseArticles.map((singleTray, cur) => {
+                                if (cur === 0) {
+                                    return (
+                                        <div key={singleTray._id}>
+                                            {singleTray.tags.map((tag, i) => {
+                                                if (i === singleTray.tags.length - 1) {
+                                                    return (
+                                                        tag.name + ''
+                                                    )
+
+                                                } else {
+                                                    return (
+                                                        tag.name + '-'
+                                                    )
+                                                }
+
+                                            })}
+                                        </div>
+                                    )
+                                } else {
+                                    return null;
+                                }
+
+                            }
+                            )}</div>
                     </div>
                 </div>
 
@@ -95,66 +106,12 @@ class TraySliderComponent extends Component {
                         this.props.knowledgeBaseArticles.map((singleTray, cur) => (
                             <div key={singleTray._id}>
                                 <TrayComponent tray={singleTray}
-                                    classname={cur === this.state.lastItem ? "last-item" : 'item'} />
+                                    classname={cur % this.state.lastItem === 0 ? "last-item" : 'item'} />
                             </div>
 
                         ))}
-                    {this.props.knowledgeBaseArticles &&
-                        this.props.knowledgeBaseArticles.map((singleTray, cur) => (
-                            <div key={singleTray._id}>
-                                <TrayComponent tray={singleTray}
-                                    classname={cur === this.state.lastItem ? "last-item" : 'item'} />
-                            </div>
 
-                        ))}
-                    {this.props.knowledgeBaseArticles &&
-                        this.props.knowledgeBaseArticles.map((singleTray, cur) => (
-                            <div key={singleTray._id}>
-                                <TrayComponent tray={singleTray}
-                                    classname={cur === this.state.lastItem ? "last-item" : 'item'} />
-                            </div>
 
-                        ))}
-                    {this.props.knowledgeBaseArticles &&
-                        this.props.knowledgeBaseArticles.map((singleTray, cur) => (
-                            <div key={singleTray._id}>
-                                <TrayComponent tray={singleTray}
-                                    classname={cur === this.state.lastItem ? "last-item" : 'item'} />
-                            </div>
-
-                        ))}
-                    {this.props.knowledgeBaseArticles &&
-                        this.props.knowledgeBaseArticles.map((singleTray, cur) => (
-                            <div key={singleTray._id}>
-                                <TrayComponent tray={singleTray}
-                                    classname={cur === this.state.lastItem ? "last-item" : 'item'} />
-                            </div>
-
-                        ))}
-                    {this.props.knowledgeBaseArticles &&
-                        this.props.knowledgeBaseArticles.map((singleTray, cur) => (
-                            <div key={singleTray._id}>
-                                <TrayComponent tray={singleTray}
-                                    classname={cur === this.state.lastItem ? "last-item" : 'item'} />
-                            </div>
-
-                        ))}
-                    {this.props.knowledgeBaseArticles &&
-                        this.props.knowledgeBaseArticles.map((singleTray, cur) => (
-                            <div key={singleTray._id}>
-                                <TrayComponent tray={singleTray}
-                                    classname={cur === this.state.lastItem ? "last-item" : 'item'} />
-                            </div>
-
-                        ))}
-                    {this.props.knowledgeBaseArticles &&
-                        this.props.knowledgeBaseArticles.map((singleTray, cur) => (
-                            <div key={singleTray._id}>
-                                <TrayComponent tray={singleTray}
-                                    classname={cur === this.state.lastItem ? "last-item" : 'item'} />
-                            </div>
-
-                        ))}
 
                 </Slider>
             </div>
